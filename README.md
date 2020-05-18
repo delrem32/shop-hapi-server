@@ -22,11 +22,11 @@ All services should be driven by a docker swarm or using pm2
 * use docker along with with CI's such as TRAVIS CI or GITLAB CI etc to deliver your images on your docker hosts   
 
 
-* npm i
-* npm run build
-* npm run tsc-watch
+** npm i
+** npm run build
+** npm run tsc-watch
 
-* remember to create launch.json for VScode
+** remember to create launch.json for VScode
 
 *{
 *  "version": "0.2.0",
