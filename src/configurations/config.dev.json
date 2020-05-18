@@ -1,0 +1,17 @@
+{
+  "database": {
+    "connectionString": "mongodb://localhost:27017/auth-service"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "jwtSecret": "random-secret-password",
+    "jwtExpiration": "1h",
+    "routePrefix": "",
+    "plugins": [
+      "logger",
+      "jwt-auth",
+      "swagger"
+    ]
+  }
+}
