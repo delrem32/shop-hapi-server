@@ -34,13 +34,19 @@ export default class UserController {
   }
 
   public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {
+    const { email } = request.payload;
     try {
       let user: any = await this.database.userModel.create(request.payload);
       let profile: any = await this.database.profileModel.create({});
+      await profile.set('email', email).save();
       await user.set('profile', profile._id).save();
       return h.response({ token: this.generateToken(user) }).code(201);
     } catch (error) {
-      return Boom.badImplementation(error);
+      if (this.database.userModel.find({email: email})) {
+        return Boom.badRequest('Schon existiert!');
+      } else {
+        return Boom.badImplementation('fuck not');
+      }
     }
   }
 
@@ -55,7 +61,7 @@ export default class UserController {
       );
       return user;
     } catch (error) {
-      return Boom.badImplementation(error);
+      return Boom.unauthorized(error);
     }
   }
 
