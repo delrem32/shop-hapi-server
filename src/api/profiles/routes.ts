@@ -15,32 +15,6 @@ export default function (
   server.bind(profileController);
   server.route({
     method: "GET",
-    path: "/profiles",
-    options: {
-      handler: profileController.getProfiles,
-      auth: "jwt",
-      tags: ["api", "profiles"],
-      description: "Get user profiles.",
-      validate: {
-        headers: UserValidator.jwtValidator,
-        query: ProfileValidator.getProfilesQueryValidator
-      },
-      plugins: {
-        "hapi-swagger": {
-          responses: {
-            "200": {
-              description: "User founded."
-            },
-            "401": {
-              description: "Please login."
-            }
-          }
-        }
-      }
-    }
-  });
-  server.route({
-    method: "GET",
     path: "/profiles/{id}",
     options: {
       handler: profileController.getProfile,
