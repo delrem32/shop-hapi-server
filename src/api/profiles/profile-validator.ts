@@ -11,6 +11,9 @@ export const updateProfilePayloadValidator = Joi.object().keys(
       phoneNumber: Joi.string().allow('').optional(),
       gender: Joi.string().allow('').optional(),
       address: Joi.string().allow('').optional(),
-      agree: Joi.boolean().allow('').optional()
+      agree: Joi.boolean().allow('').optional(),
+      cart: Joi.array().items(Joi.string()).allow([]).optional()
     }
 );
+
+export const patchCartWithItem = Joi.object({ cart: Joi.array().items(Joi.string())});

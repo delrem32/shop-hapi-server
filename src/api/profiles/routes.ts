@@ -68,7 +68,7 @@ export default function (
   });
   server.route({
     method: "PATCH",
-    path: "/profiles/{id}",
+    path: "/profiles/patch/{id}",
     options: {
       handler: profileController.patchProfile,
       auth: "jwt",
@@ -76,7 +76,35 @@ export default function (
       description: "Update current profile info.",
       validate: {
         headers: UserValidator.jwtValidator,
-        params: ProfileValidator.getProfileParamsValidator
+        params: ProfileValidator.getProfileParamsValidator,
+        payload: ProfileValidator.patchCartWithItem
+      },
+      plugins: {
+        "hapi-swagger": {
+          responses: {
+            "200": {
+              description: "Updated info."
+            },
+            "401": {
+              description: "User does not have authorization."
+            }
+          }
+        }
+      }
+    }
+  });
+  server.route({
+    method: "PATCH",
+    path: "/profiles/delete/{id}",
+    options: {
+      handler: profileController.deleteOrdersFromCartByPatch,
+      auth: "jwt",
+      tags: ["api", "profile"],
+      description: "Update current profile info.",
+      validate: {
+        headers: UserValidator.jwtValidator,
+        params: ProfileValidator.getProfileParamsValidator,
+        payload: ProfileValidator.patchCartWithItem
       },
       plugins: {
         "hapi-swagger": {

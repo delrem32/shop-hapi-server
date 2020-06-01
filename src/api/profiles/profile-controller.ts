@@ -50,8 +50,13 @@ export class ProfileController {
     return this.database.profileModel.find(payload);
   }
 
-  patchProfile({payload, params}: IRequest) {
-    return this.database.profileModel.findOneAndUpdate({_id: params.id}, payload);
+  async patchProfile({payload, params}: IRequest) {
+    await this.database.profileModel.findByIdAndUpdate(params.id, {$push: payload});
+    return await this.database.profileModel.findById(params.id);
   }
-
+  async deleteOrdersFromCartByPatch({payload, params}: IRequest) {
+    await this.database.profileModel.findByIdAndUpdate(params.id,
+      {$pullAll: payload});
+    return await this.database.profileModel.findById(params.id);
+  }
 }
