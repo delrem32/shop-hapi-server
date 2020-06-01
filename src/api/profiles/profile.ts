@@ -10,6 +10,7 @@ export interface IProfile extends Mongoose.Document {
   gender: string;
   address: string;
   agree: boolean;
+  cart: string[];
 }
 
 export const ProfileSchema = new Mongoose.Schema(
@@ -21,7 +22,8 @@ export const ProfileSchema = new Mongoose.Schema(
     phoneNumber: { type: String, default: '' },
     gender: { type: String, default: '' },
     address: { type: String, default: '' },
-    agree: { type: Boolean, default: false }
+    agree: { type: Boolean, default: false },
+    cart: {type: [{type: Mongoose.Schema.Types.ObjectId, ref:'Cards'}], default: []}
   },
   {
     timestamps: true
