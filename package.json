@@ -34,6 +34,7 @@
     "moment": "2.22.1",
     "moment-timezone": "0.5.16",
     "mongoose": "^5.9.14",
+    "mongoose-sequence": "^5.2.2",
     "nconf": "0.10.0",
     "nodemon": "1.17.3",
     "path": "0.12.7",

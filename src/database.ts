@@ -8,6 +8,8 @@ import { IUser, UserModel } from "./api/users/user";
 import { IDataConfiguration } from "./configurations";
 import { ILogging, LoggingModel } from "./plugins/logging/logging";
 import { ICards, CardsModel } from "./api/cards/cards";
+import { IOrders, OrdersModel } from "./api/orders/orders";
+const AutoIncrement = require('mongoose-sequence')(Mongoose);
 
 export interface IDatabase {
   loggingModel: Mongoose.Model<ILogging>;
@@ -18,6 +20,7 @@ export interface IDatabase {
   conversationModel: Mongoose.Model<IConversation>;
   friendsModel: Mongoose.Model<IFriends>;
   cardsModel: Mongoose.Model<ICards>;
+  ordersModel: Mongoose.Model<IOrders>;
 }
 
 export function init(config: IDataConfiguration): IDatabase {
@@ -41,6 +44,7 @@ export function init(config: IDataConfiguration): IDatabase {
     messageModel: MessagesModel,
     conversationModel: ConversationModel,
     friendsModel: FriendsModel,
-    cardsModel: CardsModel
+    cardsModel: CardsModel,
+    ordersModel: OrdersModel
   };
 }
