@@ -1,6 +1,6 @@
 import * as Hapi from "hapi";
-import {IPlugin} from "./plugins/interfaces";
-import {IServerConfigurations} from "./configurations";
+import { IPlugin } from "./plugins/interfaces";
+import { IServerConfigurations } from "./configurations";
 import * as Logs from "./plugins/logging";
 import * as Users from "./api/users";
 import * as Profiles from "./api/profiles";
@@ -8,7 +8,9 @@ import * as Files from "./api/files";
 import * as Conversation from "./api/conversations";
 import * as Friends from "./api/friends";
 import * as Cards from "./api/cards";
-import {IDatabase} from "./database";
+import { IDatabase } from "./database";
+import { OrdersModel } from "./api/orders/orders";
+import * as Orders from "./api/orders";
 
 export async function init(
   configs: IServerConfigurations,
@@ -17,7 +19,7 @@ export async function init(
   try {
     const port = process.env.PORT || configs.port;
     const server = new Hapi.Server({
-      debug: {request: ['error']},
+      debug: { request: ['error'] },
       host: '0.0.0.0',
       port: port,
       routes: {
@@ -60,7 +62,7 @@ export async function init(
     Conversation.init(server, configs, database);
     Friends.init(server, configs, database);
     Cards.init(server, configs, database);
-
+    Orders.init(server, configs, database);
     console.log("Routes registered sucessfully.");
 
     return server;
