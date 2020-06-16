@@ -30,4 +30,7 @@ export default class OrdersController {
   async deleteOrder(request: IRequest) {
     return await this.database.ordersModel.findByIdAndRemove(request.params.id);
   }
+  async getOrdersByUser(request: IRequest) {
+    return this.database.ordersModel.find(request.payload);
+  }
 }
