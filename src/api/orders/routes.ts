@@ -1,10 +1,10 @@
 import * as Hapi from "hapi";
 import { IServerConfigurations } from "../../configurations";
 import { IDatabase } from "../../database";
-import { jwtValidator } from "../users/user-validator";
 import OrdersController from "./orders-controller";
 import * as OrdersValidator from "./orders-validator";
-import { OrdersModel } from "./orders";
+import * as ProfileValidator from "../profiles/profile-validator";
+import * as UserValidator from "../users/user-validator";
 
 export default function (server: Hapi.Server,
   serverConfigs: IServerConfigurations,
@@ -25,6 +25,29 @@ export default function (server: Hapi.Server,
           responses: {
             "200": {
               description: "All orders founded."
+            }
+          }
+        }
+      }
+    }
+  });
+  server.route({
+    method: 'POST',
+    path: "/orders/ordersByUser",
+    handler: ordersController.getOrdersByUser,
+    options: {
+      auth: false,
+      tags: ["api", "orders"],
+      description: "Get all orders by current user.",
+      validate: {
+        headers: UserValidator.jwtValidator,
+        payload: OrdersValidator.getOrderByProfileId
+      },
+      plugins: {
+        "hapi-swagger": {
+          responses: {
+            "200": {
+              description: "All orders by current user founded."
             }
           }
         }

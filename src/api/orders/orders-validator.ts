@@ -21,3 +21,4 @@ export const readOrderRequestByValidator = Joi.object({
     type: Joi.string().optional(),
     quantity: Joi.number().optional()
 });
+export const getOrderByProfileId = Joi.object({ delivery_to: Joi.string().required() });

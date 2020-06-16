@@ -11,14 +11,15 @@ export default class UserController {
   private configs: IServerConfigurations;
 
 
+
   constructor(configs: IServerConfigurations, database: IDatabase) {
     this.database = database;
     this.configs = configs;
   }
 
   public async loginUser(request: ILoginRequest, h: Hapi.ResponseToolkit) {
-    const { email, password } = request.payload;
-
+    const email = request.payload.email.toLowerCase();
+    const password = request.payload.password.toLowerCase();
     let user: IUser = await this.database.userModel.findOne({ email });
 
     if (!user) {
@@ -33,7 +34,7 @@ export default class UserController {
     return { token: this.generateToken(user) };
   }
 
-  public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {
+  public async createUser(request: ILoginRequest, h: Hapi.ResponseToolkit) {
     const { email } = request.payload;
     try {
       let user: any = await this.database.userModel.create(request.payload);
