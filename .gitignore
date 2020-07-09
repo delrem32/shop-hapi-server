@@ -40,3 +40,5 @@ build
 #Ignore typings
 typings
 
+#Ignore images and data-files
+data

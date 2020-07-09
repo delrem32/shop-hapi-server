@@ -36,7 +36,7 @@ export default class FilesController {
     }
 
     async addFile(request: IRequest) {
-        const path = join(__dirname, '../../../../../data', request.payload['file'].hapi.filename);
+        const path = join(__dirname, '../../../../data', request.payload['file'].hapi.filename);
         const name = request.payload['file'].hapi.filename;
         const existing = await this.database.fileModel.findOne({ path, name });
         const stream = request.payload['file'].pipe(createWriteStream(path));
