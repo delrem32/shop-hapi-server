@@ -49,6 +49,7 @@ export default function (server: Hapi.Server,
             payload: {
                 maxBytes: 209715200,
                 output: 'stream',
+                allow: 'multipart/form-data',
                 parse: true
             },
             validate: {
@@ -58,7 +59,7 @@ export default function (server: Hapi.Server,
                 "hapi-swagger": {
                     responses: {
                         "200": {
-                            description: "File founded."
+                            description: "File created."
                         },
                         "401": {
                             description: "Please login."
@@ -85,7 +86,7 @@ export default function (server: Hapi.Server,
                 "hapi-swagger": {
                     responses: {
                         "200": {
-                            description: "File founded."
+                            description: "File deleted."
                         },
                         "401": {
                             description: "Please login."
