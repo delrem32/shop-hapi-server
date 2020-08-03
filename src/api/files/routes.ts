@@ -16,11 +16,10 @@ export default function (server: Hapi.Server,
         path: "/files/{id}",
         handler: filesController.getFileById,
         options: {
-            auth: "jwt",
+            auth: false,
             tags: ["api", "files"],
             description: "Get user file.",
             validate: {
-                headers: jwtValidator,
                 params: getFileparamsValidator
             },
             plugins: {
