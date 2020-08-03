@@ -11,6 +11,7 @@ export interface IProfile extends Mongoose.Document {
   address: string;
   agree: boolean;
   cart: string[];
+  role: 'admin' | 'user' | 'content-manager';
 }
 
 export const ProfileSchema = new Mongoose.Schema(
@@ -23,7 +24,8 @@ export const ProfileSchema = new Mongoose.Schema(
     gender: { type: String, default: '' },
     address: { type: String, default: '' },
     agree: { type: Boolean, default: false },
-    cart: {type: [{type: Mongoose.Schema.Types.ObjectId, ref:'Cards'}], default: []}
+    cart: {type: [{type: Mongoose.Schema.Types.ObjectId, ref:'Cards'}], default: []},
+    role: {type: String, default: 'user'}
   },
   {
     timestamps: true

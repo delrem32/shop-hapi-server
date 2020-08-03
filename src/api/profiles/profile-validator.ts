@@ -12,7 +12,8 @@ export const updateProfilePayloadValidator = Joi.object().keys(
       gender: Joi.string().allow('').optional(),
       address: Joi.string().allow('').optional(),
       agree: Joi.boolean().allow('').optional(),
-      cart: Joi.array().items(Joi.string()).allow([]).optional()
+      cart: Joi.array().items(Joi.string()).allow([]).optional(),
+      role: Joi.string().valid('admin', 'user', 'content-manager').optional()
     }
 );
 
