@@ -22,7 +22,10 @@ export default class OrdersController {
     return this.database.ordersModel.findById(request.params.id);
   }
   async updateOrder(request: IRequest) {
-    return await this.database.ordersModel.findByIdAndUpdate(request.params.id, request.payload);
+    const {id} = request.params;
+    await this.database.ordersModel.findByIdAndUpdate(id, request.payload);
+    const profile: any = await this.database.ordersModel.findById(id);
+    return profile._doc;
   }
   async queryFriendsRequest({ payload }: IRequest) {
     return this.database.ordersModel.find(payload);
