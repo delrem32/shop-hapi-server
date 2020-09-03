@@ -1,9 +1,8 @@
 {
   "database": {
-    "connectionString": "mongodb://localhost:27017/auth-service"
+    "connectionString": "mongodb+srv://trello-bzb_1:Mypass1234@baazeeboo.cg1la.mongodb.net/trello-db?retryWrites=true&w=majority"
   },
   "server": {
-    "host": "0.0.0.0",
     "port": 5000,
     "jwtSecret": "random-secret-password",
     "jwtExpiration": "1h",
