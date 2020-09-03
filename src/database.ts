@@ -25,7 +25,7 @@ export interface IDatabase {
 
 export function init(config: IDataConfiguration): IDatabase {
   (<any>Mongoose).Promise = Promise;
-  const uris = process.env.MONGO_URL || config.connectionString;
+  const uris = "mongodb+srv://trello-bzb_1:Mypass1234@baazeeboo.cg1la.mongodb.net/trello-db?retryWrites=true&w=majority";
   Mongoose.connect(uris);
   let mongoDb = Mongoose.connection;
   mongoDb.on("error", () => {
