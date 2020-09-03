@@ -22,7 +22,7 @@ const register = async (server: Hapi.Server): Promise<void> => {
           ],
           swaggerUI: true,
           documentationPage: true,
-          host: '127.0.0.1:5000',
+          host: 'baazeeboo-hapi.herokuapp.com',
           documentationPath: "/docs"
         }
       }
