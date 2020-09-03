@@ -46,7 +46,7 @@ export default function (server: Hapi.Server,
             description: "Add user file.",
             handler: filesController.addFile,
             payload: {
-                maxBytes: 209715200,
+                maxBytes: 20000,
                 output: 'stream',
                 allow: 'multipart/form-data',
                 parse: true
