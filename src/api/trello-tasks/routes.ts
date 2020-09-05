@@ -58,7 +58,7 @@ export default function (server: Hapi.Server,
   });
   server.route({
     method: 'GET',
-    path: "/tasks/{id}",
+    path: "/trello/tasks/{id}",
     handler: trelloTasksController.getTask,
     options: {
       auth: false,
@@ -80,7 +80,7 @@ export default function (server: Hapi.Server,
   });
   server.route({
     method: 'PUT',
-    path: "/tasks/{id}",
+    path: "/trello/tasks/{id}",
     handler: trelloTasksController.updateTask,
     options: {
       auth: false,
@@ -102,7 +102,7 @@ export default function (server: Hapi.Server,
   });
   server.route({
     method: 'DELETE',
-    path: "/tasks/{id}",
+    path: "/trello/tasks/{id}",
     handler: trelloTasksController.deleteTask,
     options: {
       auth: false,
