@@ -1,6 +1,6 @@
 import { IServerConfigurations } from "../../configurations";
 import { IDatabase } from "../../database";
-import { IRequest, IIdsRequest } from "../../interfaces/request";
+import { IRequest, IIdsRequest, IColumnRequest } from "../../interfaces/request";
 
 export default class TrelloColumnsController {
   private database: IDatabase;
@@ -15,8 +15,10 @@ export default class TrelloColumnsController {
   async getColumnsByIds(request: IIdsRequest) {
     return await this.database.trelloColumnsModel.find({_id: {$in: request.payload.ids}});
   }
-  async createColumn(request: IRequest) {
-    return await this.database.trelloColumnsModel.create(request.payload);
+  async createColumn(request: IColumnRequest) {
+    const column = await this.database.trelloColumnsModel.create(request.payload);
+    await this.database.trelloColumnOrderModel.findOneAndUpdate('', {$push: {columnOrder: column._id}});
+    return column;
   }
   async getColumn(request: IRequest) {
     return await this.database.trelloColumnsModel.findById(request.params.id);
