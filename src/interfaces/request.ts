@@ -18,3 +18,10 @@ export interface ILoginRequest extends IRequest {
     password: string;
   };
 }
+
+export interface IIdsRequest {
+  payload: {
+    ids: [string];
+  };
+}
+

@@ -9,6 +9,9 @@ import { IDataConfiguration } from "./configurations";
 import { ILogging, LoggingModel } from "./plugins/logging/logging";
 import { ICards, CardsModel } from "./api/cards/cards";
 import { IOrders, OrdersModel } from "./api/orders/orders";
+import { ITrelloColumns, TrelloColumnsModel } from "./api/trello-columns/trello-columns";
+import { ITrelloTasks, TrelloTasksModel } from "./api/trello-tasks/trello-tasks";
+import { ITrelloColumnOrder, TrelloColumnOrderModel } from "./api/trello-column-order/trello-column-order";
 const AutoIncrement = require('mongoose-sequence')(Mongoose);
 
 export interface IDatabase {
@@ -21,6 +24,9 @@ export interface IDatabase {
   friendsModel: Mongoose.Model<IFriends>;
   cardsModel: Mongoose.Model<ICards>;
   ordersModel: Mongoose.Model<IOrders>;
+  trelloColumnsModel: Mongoose.Model<ITrelloColumns>;
+  trelloTasksModel: Mongoose.Model<ITrelloTasks>;
+  trelloColumnOrderModel: Mongoose.Model<ITrelloColumnOrder>;
 }
 
 export function init(config: IDataConfiguration): IDatabase {
@@ -45,6 +51,9 @@ export function init(config: IDataConfiguration): IDatabase {
     conversationModel: ConversationModel,
     friendsModel: FriendsModel,
     cardsModel: CardsModel,
-    ordersModel: OrdersModel
+    ordersModel: OrdersModel,
+    trelloColumnOrderModel: TrelloColumnOrderModel,
+    trelloColumnsModel: TrelloColumnsModel,
+    trelloTasksModel: TrelloTasksModel
   };
 }
