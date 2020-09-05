@@ -83,6 +83,7 @@ export default function (server: Hapi.Server,
       tags: ["api", "columnOrder"],
       description: "Update single column order data.",
       validate: {
+        params: TrelloColumnOrderValidator.getColumnOrderValidator,
         payload: TrelloColumnOrderValidator.createColumnOrderValidator
       },
       plugins: {
