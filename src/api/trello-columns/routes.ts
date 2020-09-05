@@ -87,6 +87,7 @@ export default function (server: Hapi.Server,
       tags: ["api", "columns"],
       description: "Update single column.",
       validate: {
+        params: TrelloColumnsValidator.getColumnValidator,
         payload: TrelloColumnsValidator.createColumnValidator
       },
       plugins: {

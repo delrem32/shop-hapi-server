@@ -87,6 +87,7 @@ export default function (server: Hapi.Server,
       tags: ["api", "tasks"],
       description: "Update single task.",
       validate: {
+        params: TrelloTasksValidator.getTaskValidator,
         payload: TrelloTasksValidator.createTaskValidator
       },
       plugins: {
