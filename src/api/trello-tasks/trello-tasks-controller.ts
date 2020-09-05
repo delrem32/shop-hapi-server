@@ -1,6 +1,6 @@
 import { IServerConfigurations } from "../../configurations";
 import { IDatabase } from "../../database";
-import { IRequest, IIdsRequest } from "../../interfaces/request";
+import { IRequest, IIdsRequest, ITaskRequest } from "../../interfaces/request";
 
 export default class TrelloTasksController {
   private database: IDatabase;
@@ -15,8 +15,10 @@ export default class TrelloTasksController {
   async getTasksByIds(request: IIdsRequest) {
     return await this.database.trelloTasksModel.find({_id: {$in: request.payload.ids}});
   }
-  async createTask(request: IRequest) {
-    return await this.database.trelloTasksModel.create(request.payload);
+  async createTask(request: ITaskRequest) {
+    const task = await this.database.trelloTasksModel.create({content: request.payload.content});
+    await this.database.trelloColumnsModel.findOneAndUpdate({_id: request.payload.columnId}, {$push: {tasksIds: task._id}});
+    return task;
   }
   async getTask(request: IRequest) {
     return await this.database.trelloTasksModel.findById(request.params.id);

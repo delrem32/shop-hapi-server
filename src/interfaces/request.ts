@@ -19,9 +19,22 @@ export interface ILoginRequest extends IRequest {
   };
 }
 
+export interface ITaskRequest {
+  payload: {
+    content: string;
+    columnId: string;
+  };
+}
+
+export interface IColumnRequest {
+  payload: {
+    title: string;
+    tasksIds: [string];
+  };
+}
+
 export interface IIdsRequest {
   payload: {
     ids: [string];
   };
 }
-
