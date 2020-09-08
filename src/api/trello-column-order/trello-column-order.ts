@@ -10,6 +10,7 @@ export const TrelloColumnOrderSchema = new Mongoose.Schema(
     id: { type: Mongoose.Schema.Types.ObjectId },
     columnOrder: {
       type: [{ type: Mongoose.Schema.Types.ObjectId, ref: "TrelloColumns" }],
+      default: []
     },
   },
   {
