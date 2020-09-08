@@ -30,6 +30,7 @@ export interface IColumnRequest {
   payload: {
     title: string;
     tasksIds: [string];
+    columnOrderId: string;
   };
 }
 

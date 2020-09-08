@@ -1,16 +1,14 @@
-import * as Hapi from 'hapi';
-import * as Boom from 'boom';
-import * as Jwt from 'jsonwebtoken';
-import { IUser } from './user';
-import { IDatabase } from '../../database';
-import { IServerConfigurations } from '../../configurations';
-import { ILoginRequest, IRequest } from '../../interfaces/request';
+import * as Hapi from "hapi";
+import * as Boom from "boom";
+import * as Jwt from "jsonwebtoken";
+import { IUser } from "./user";
+import { IDatabase } from "../../database";
+import { IServerConfigurations } from "../../configurations";
+import { ILoginRequest, IRequest } from "../../interfaces/request";
 
 export default class UserController {
   private database: IDatabase;
   private configs: IServerConfigurations;
-
-
 
   constructor(configs: IServerConfigurations, database: IDatabase) {
     this.database = database;
@@ -23,12 +21,11 @@ export default class UserController {
     let user: IUser = await this.database.userModel.findOne({ email });
 
     if (!user) {
-      return Boom.unauthorized('User does not exists.');
+      return Boom.unauthorized("User does not exists.");
     }
 
-
     if (!user.validatePassword(password)) {
-      return Boom.unauthorized('Password is invalid.');
+      return Boom.unauthorized("Password is invalid.");
     }
 
     return { token: this.generateToken(user) };
@@ -39,14 +36,18 @@ export default class UserController {
     try {
       let user: any = await this.database.userModel.create(request.payload);
       let profile: any = await this.database.profileModel.create({});
-      await profile.set('email', email).save();
-      await user.set('profile', profile._id).save();
+      await profile.set("email", email).save();
+      let trelloColumnOrder: any = await this.database.trelloColumnOrderModel.create(
+        {}
+      );
+      await user.set("profile", profile._id).save();
+      await user.set("trelloColumnOrder", trelloColumnOrder._id).save();
       return h.response({ token: this.generateToken(user) }).code(201);
     } catch (error) {
-      if (this.database.userModel.find({email: email})) {
-        return Boom.badRequest('Schon existiert!');
+      if (this.database.userModel.find({ email: email })) {
+        return Boom.badRequest("Schon existiert!");
       } else {
-        return Boom.badImplementation('fuck not');
+        return Boom.badImplementation("fuck not");
       }
     }
   }
