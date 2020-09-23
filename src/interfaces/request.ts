@@ -29,7 +29,7 @@ export interface ITaskRequest {
 export interface IColumnRequest {
   payload: {
     title: string;
-    tasksIds: [string];
+    taskIds: [string];
     columnOrderId: string;
   };
 }
