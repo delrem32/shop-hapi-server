@@ -22,10 +22,10 @@ export default class TrelloColumnsController {
     });
   }
   async createColumn(request: IColumnRequest) {
-    const { title, tasksIds, columnOrderId } = request.payload;
+    const { title, taskIds, columnOrderId } = request.payload;
     const column = await this.database.trelloColumnsModel.create({
       title,
-      tasksIds,
+      taskIds,
     });
     await this.database.trelloColumnOrderModel.findByIdAndUpdate(
       columnOrderId,
