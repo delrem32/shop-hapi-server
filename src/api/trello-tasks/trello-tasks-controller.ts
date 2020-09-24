@@ -17,7 +17,7 @@ export default class TrelloTasksController {
   }
   async createTask(request: ITaskRequest) {
     const task = await this.database.trelloTasksModel.create({content: request.payload.content});
-    await this.database.trelloColumnsModel.findByIdAndUpdate({_id: request.payload.columnId}, {$push: {tasksIds: task._id}}, {new: true});
+    await this.database.trelloColumnsModel.findByIdAndUpdate(request.payload.columnId, {$push: {tasksIds: task._id}}, {new: true});
     return task;
   }
   async getTask(request: IRequest) {
