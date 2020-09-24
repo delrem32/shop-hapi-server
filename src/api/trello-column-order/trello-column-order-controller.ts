@@ -22,7 +22,7 @@ export default class TrelloColumnOrderController {
     return await this.database.trelloColumnOrderModel.findById(request.params.id);
   }
   async updateColumnOrder(request: IRequest) {
-    return await this.database.trelloColumnOrderModel.findByIdAndUpdate(request.params.id, request.payload);
+    return await this.database.trelloColumnOrderModel.findByIdAndUpdate(request.params.id, request.payload, {new: true});
   }
   async deleteColumnOrder(request: IRequest) {
     return await this.database.trelloColumnOrderModel.findByIdAndRemove(request.params.id);

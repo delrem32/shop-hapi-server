@@ -6,6 +6,7 @@ import {
   IColumnRequest,
 } from "../../interfaces/request";
 import { title } from "process";
+import { options } from "joi";
 
 export default class TrelloColumnsController {
   private database: IDatabase;
@@ -29,7 +30,8 @@ export default class TrelloColumnsController {
     });
     await this.database.trelloColumnOrderModel.findByIdAndUpdate(
       columnOrderId,
-      { $push: { columnOrder: column._id } }
+      { $push: { columnOrder: column._id } },
+      {new: true}
     );
     return column;
   }
@@ -39,7 +41,8 @@ export default class TrelloColumnsController {
   async updateColumn(request: IRequest) {
     return await this.database.trelloColumnsModel.findByIdAndUpdate(
       request.params.id,
-      request.payload
+      request.payload,
+      {new: true}
     );
   }
   async deleteColumn(request: IRequest) {
