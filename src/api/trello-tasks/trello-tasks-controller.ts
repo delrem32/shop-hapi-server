@@ -24,7 +24,7 @@ export default class TrelloTasksController {
     return await this.database.trelloTasksModel.findById(request.params.id);
   }
   async updateTask(request: IRequest) {
-    return await this.database.trelloTasksModel.findByIdAndUpdate(request.params.id, request.payload);
+    return await this.database.trelloTasksModel.findByIdAndUpdate(request.params.id, request.payload, {new: true});
   }
   async deleteTask(request: IRequest) {
     return await this.database.trelloTasksModel.findByIdAndRemove(request.params.id);
