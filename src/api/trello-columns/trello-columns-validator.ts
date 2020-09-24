@@ -3,6 +3,7 @@ import * as Joi from "joi";
 export const createColumnValidator = Joi.object({
   title: Joi.string(),
   taskIds: Joi.array().items(Joi.string()).allow([]).unique(),
+  columnOrderId: Joi.string(),
 });
 export const getColumnsByIdsValidator = Joi.object({
   ids: Joi.array().items(Joi.string()),
